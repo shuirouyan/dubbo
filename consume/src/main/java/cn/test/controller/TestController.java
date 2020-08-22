@@ -1,5 +1,6 @@
 package cn.test.controller;
 
+import cn.test.interfaces.ProviderTest;
 import cn.test.interfaces.Report;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,9 @@ public class TestController {
     @Reference
     private Report report;
 
+    @Reference
+    private ProviderTest providerTest;
+
     @RequestMapping("/hello")
     public String methodController() {
         return "hello";
@@ -26,5 +30,12 @@ public class TestController {
         String method = report.method(param);
         return "Reference:" + method;
     }
+
+    @RequestMapping("/providerMethod")
+    public String providerMethod() {
+        String method = providerTest.providerMethod();
+        return "providerMethod, Reference:" + method;
+    }
+
 
 }
